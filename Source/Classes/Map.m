@@ -41,7 +41,7 @@
             }
             
             SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
-            for (int i = 0; i<50; i++) {
+            for (int i = 0; i<100; i++) {
                 SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
                 treeImage.x = [SPUtils randomIntBetweenMin:0 andMax:width*baseTextureSize-treeImage.width];
                 treeImage.y = [SPUtils randomIntBetweenMin:0 andMax:height*baseTextureSize-treeImage.height];

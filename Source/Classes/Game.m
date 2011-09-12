@@ -19,6 +19,7 @@
         NSLog(@"x:%f y:%f", map.pivotX, map.pivotY);
         
         SPQuad *background = [SPQuad quadWithWidth:480 height:320];
+        background.color = 0x000000;
         background.name = @"background";
         [self addChild:background];
         map = newMap;
