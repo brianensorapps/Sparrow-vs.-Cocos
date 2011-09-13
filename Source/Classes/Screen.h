@@ -11,6 +11,10 @@
 @interface Screen : SPSprite {
     float mHeight;
     float mWidth;
+    BOOL showsFPS;
+    int frameRateCount;
+    float timeCount;
+    SPTextField *frameRateText;
 }
 
 + (Screen *)sharedScreen;
@@ -18,5 +22,6 @@
 
 @property (nonatomic, readonly) float height;
 @property (nonatomic, readonly) float width;
+@property (nonatomic, assign) BOOL showsFPS;
 
 @end

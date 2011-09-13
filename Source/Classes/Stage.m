@@ -16,6 +16,7 @@
     {
         Screen *screen = [Screen sharedScreen];
         [self addChild:screen];
+        screen.showsFPS = YES;
         
         Game *game = [[Game alloc] initWithMap:[Map mapWithLevel:1]];
         [screen addChild:game];
