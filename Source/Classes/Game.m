@@ -23,12 +23,15 @@
         background.name = @"background";
         [self addChild:background];
         map = newMap;
-        map.pivotX = self.width/2;
-        map.pivotY = (self.height+bird.y+bird.height)/2;
-        map.x = map.pivotX;
-        map.y = map.pivotY;
+        map.x = -map.width/2;
+        map.y = -map.height/2;
         
-        [self addChild:map];
+        world = [SPSprite sprite];
+        world.x = bird.x+bird.width/2;
+        world.y = bird.y+bird.height/2;
+        [self addChild:world];
+        
+        [world addChild:map];
         [self addChild:bird];
         
         SPSprite *positionIndicator = [SPSprite sprite];
@@ -70,8 +73,8 @@
 }
 
 - (void)onEnterFrame:(SPEnterFrameEvent *)event {
-    map.pivotX += -sin(map.rotation)*(100*event.passedTime);
-    map.pivotY += -cos(map.rotation)*(100*event.passedTime);
+    world.pivotX += -sin(world.rotation)*(100*event.passedTime);
+    world.pivotY += -cos(world.rotation)*(100*event.passedTime);
     SPRectangle *birdBounds = [bird boundsInSpace:map];
     SPPoint *birdPosition = [SPPoint pointWithX:birdBounds.x+birdBounds.width/2 y:birdBounds.y+birdBounds.height/2];
     float newX = birdPosition.x/40+2;
@@ -85,10 +88,10 @@
     if (turning) {
         switch (turnDirection) {
             case 0:
-                map.rotation += SP_D2R(50)*event.passedTime;
+                world.rotation += SP_D2R(50)*event.passedTime;
                 break;
             case 1:
-                map.rotation -= SP_D2R(50)*event.passedTime;
+                world.rotation -= SP_D2R(50)*event.passedTime;
                 break;
             default:
                 break;

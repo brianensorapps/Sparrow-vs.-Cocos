@@ -15,6 +15,7 @@
     BOOL turnDirection;
     SPQuad *bird;
     SPQuad *positionQuad;
+    SPSprite *world;
 }
 
 - (id)initWithMap:(Map *)newMap;
