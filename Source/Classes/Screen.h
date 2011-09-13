@@ -8,9 +8,15 @@
 
 #import "SPSprite.h"
 
-@interface Screen : SPSprite
+@interface Screen : SPSprite {
+    float mHeight;
+    float mWidth;
+}
 
 + (Screen *)sharedScreen;
 - (UIInterfaceOrientation)orientation;
+
+@property (nonatomic, readonly) float height;
+@property (nonatomic, readonly) float width;
 
 @end

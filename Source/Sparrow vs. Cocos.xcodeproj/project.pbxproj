@@ -114,12 +114,12 @@
 				1D3623250D0F684500981E51 /* ApplicationDelegate.m */,
 				D3D5760C141D522A0016D9B7 /* Screen.h */,
 				D3D5760D141D522A0016D9B7 /* Screen.m */,
+				DE4A3DE310FFB2AF00FDA492 /* Stage.h */,
+				DE4A3DE410FFB2AF00FDA492 /* Stage.m */,
 				D3D16BC4141D5D1600298E6E /* Game.h */,
 				D3D16BC5141D5D1600298E6E /* Game.m */,
 				D3D16BC1141D5AFF00298E6E /* Map.h */,
 				D3D16BC2141D5AFF00298E6E /* Map.m */,
-				DE4A3DE310FFB2AF00FDA492 /* Stage.h */,
-				DE4A3DE410FFB2AF00FDA492 /* Stage.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

@@ -7,6 +7,7 @@
 //
 
 #import "Map.h"
+#import "Screen.h"
 
 @implementation Map
 
@@ -18,7 +19,7 @@
             NSDictionary *size = [map objectForKey:@"size"];
             
             int baseTextureSize = [[map objectForKey:@"baseTextureSize"] intValue];
-            int minSize = 480/baseTextureSize;
+            int minSize = [Screen sharedScreen].width/baseTextureSize;
             int width = MAX([[size objectForKey:@"width"] intValue], minSize);
             int height = MAX([[size objectForKey:@"height"] intValue], minSize);
             int area = width*height;

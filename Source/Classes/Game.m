@@ -7,16 +7,16 @@
 //
 
 #import "Game.h"
+#import "Screen.h"
 
 @implementation Game
 
 - (id)initWithMap:(Map *)newMap {
     if ((self = [super init])) {
         bird = [SPQuad quadWithWidth:50 height:70];
-        bird.x = ([UIScreen mainScreen].bounds.size.height-bird.width)/2;
-        bird.y = [UIScreen mainScreen].bounds.size.width-bird.height-20;
+        bird.x = ([Screen sharedScreen].width-bird.width)/2;
+        bird.y = [Screen sharedScreen].height-bird.height-20;
         bird.color = 0x0000ff;
-        NSLog(@"x:%f y:%f", map.pivotX, map.pivotY);
         
         SPQuad *background = [SPQuad quadWithWidth:480 height:320];
         background.color = 0x000000;
@@ -31,9 +31,23 @@
         [self addChild:map];
         [self addChild:bird];
         
+        SPSprite *positionIndicator = [SPSprite sprite];
+        SPQuad *representationBackground = [SPQuad quadWithWidth:88 height:88 color:0x000000];
+        [positionIndicator addChild:representationBackground];
+        SPQuad *mapRepresentation = [SPQuad quadWithWidth:84 height:84];
+        mapRepresentation.x = 2;
+        mapRepresentation.y = 2;
+        [positionIndicator addChild:mapRepresentation];
+        positionQuad = [SPQuad quadWithWidth:4 height:4 color:0xFF0000];
+        positionQuad.x = 2;
+        positionQuad.y = 2;
+        [positionIndicator addChild:positionQuad];
+        positionIndicator.x = [Screen sharedScreen].width-positionIndicator.width-10;
+        positionIndicator.y = [Screen sharedScreen].height-positionIndicator.height-10;
+        [self addChild:positionIndicator];
+        
         [self addEventListener:@selector(onEnterFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
         [self addEventListener:@selector(onTouch:) atObject:self forType:SP_EVENT_TYPE_TOUCH];
-        NSLog(@"game initialized");
     }
     return self;
 }
@@ -56,9 +70,18 @@
 }
 
 - (void)onEnterFrame:(SPEnterFrameEvent *)event {
-    map.pivotX += -sin(map.rotation)*(30*event.passedTime);
-    map.pivotY += -cos(map.rotation)*(30*event.passedTime);
-    
+    map.pivotX += -sin(map.rotation)*(100*event.passedTime);
+    map.pivotY += -cos(map.rotation)*(100*event.passedTime);
+    SPRectangle *birdBounds = [bird boundsInSpace:map];
+    SPPoint *birdPosition = [SPPoint pointWithX:birdBounds.x+birdBounds.width/2 y:birdBounds.y+birdBounds.height/2];
+    float newX = birdPosition.x/40+2;
+    float newY = birdPosition.y/40+2;
+    if (newX > 2 && newX < 82) {
+        positionQuad.x = birdPosition.x/40+2;
+    }
+    if (newY > 2 && newY < 82) {
+        positionQuad.y = birdPosition.y/40+2;
+    }
     if (turning) {
         switch (turnDirection) {
             case 0:

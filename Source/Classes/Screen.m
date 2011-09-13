@@ -10,6 +10,9 @@
 
 @implementation Screen
 
+@synthesize height = mHeight;
+@synthesize width = mWidth;
+
 + (Screen *)sharedScreen {
     static Screen *sharedScreen;
     @synchronized(self) {
@@ -52,6 +55,14 @@
 
 - (UIInterfaceOrientation)orientation {
     return [UIApplication sharedApplication].statusBarOrientation;
+}
+
+- (float)width {
+    return [SPStage mainStage].height;
+}
+
+- (float)height {
+    return [SPStage mainStage].width;
 }
 
 @end
