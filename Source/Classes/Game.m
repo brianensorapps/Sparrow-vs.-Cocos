@@ -13,7 +13,9 @@
 
 - (id)initWithMap:(Map *)newMap {
     if ((self = [super init])) {
-        bird = [SPQuad quadWithWidth:50 height:70];
+        gameJuggler = [[SPJuggler alloc] init];
+        
+        bird = [SPQuad quadWithWidth:70 height:70];
         bird.x = ([Screen sharedScreen].width-bird.width)/2;
         bird.y = [Screen sharedScreen].height-bird.height-20;
         bird.color = 0x0000ff;
@@ -73,6 +75,7 @@
 }
 
 - (void)onEnterFrame:(SPEnterFrameEvent *)event {
+    [gameJuggler advanceTime:event.passedTime];
     world.pivotX += -sin(world.rotation)*(100*event.passedTime);
     world.pivotY += -cos(world.rotation)*(100*event.passedTime);
     SPRectangle *birdBounds = [bird boundsInSpace:map];
@@ -85,18 +88,49 @@
     if (newY > 2 && newY < 82) {
         positionQuad.y = birdPosition.y/40+2;
     }
+    NSString *collisionName = [map objectCollidingWithBird:bird];
+    if ([collisionName isEqualToString:@"tree"]) {
+        [self setInvertedControls:YES];
+        [gameJuggler removeAllObjects];
+        [[gameJuggler delayInvocationAtTarget:self byTime:5] setInvertedControls:NO];
+    }
     if (turning) {
         switch (turnDirection) {
             case 0:
-                world.rotation += SP_D2R(50)*event.passedTime;
+                if (!invertedControls) {
+                    world.rotation += SP_D2R(50)*event.passedTime;
+                }
+                else {
+                    world.rotation -= SP_D2R(50)*event.passedTime;
+                }
                 break;
             case 1:
-                world.rotation -= SP_D2R(50)*event.passedTime;
+                if (!invertedControls) {
+                    world.rotation -= SP_D2R(50)*event.passedTime;
+                }
+                else {
+                    world.rotation += SP_D2R(50)*event.passedTime;
+                }
                 break;
             default:
                 break;
         }
     }
+}
+
+- (void)setInvertedControls:(BOOL)inverted {
+    if (inverted) {
+        bird.color = 0xFF0000;
+    }
+    else {
+        bird.color = 0x0000FF;
+    }
+    invertedControls = inverted;
+}
+
+- (void)dealloc {
+    [gameJuggler release];
+    [super dealloc];
 }
 
 @end

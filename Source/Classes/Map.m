@@ -41,12 +41,19 @@
                 }
             }
             
+            treeBounds = [[NSMutableArray alloc] init];
             SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
             for (int i = 0; i<100; i++) {
                 SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
                 treeImage.x = [SPUtils randomIntBetweenMin:0 andMax:width*baseTextureSize-treeImage.width];
                 treeImage.y = [SPUtils randomIntBetweenMin:0 andMax:height*baseTextureSize-treeImage.height];
                 [self addChild:treeImage];
+                SPRectangle *bounds = treeImage.bounds;
+                bounds.width -= 10;
+                bounds.height -= 10;
+                bounds.x += 5;
+                bounds.y += 5;
+                [treeBounds addObject:bounds];
             }
             
             [self compile];
@@ -61,6 +68,24 @@
 
 + (Map *)mapWithLevel:(int)level {
     return [[[Map alloc] initWithLevel:level] autorelease];
+}
+
+- (NSString *)objectCollidingWithBird:(SPDisplayObject *)bird {
+    SPRectangle *birdRect = [bird boundsInSpace:self];
+    for (SPRectangle *treeRect in treeBounds) {
+        float treeRadius = treeRect.width/2;
+        SPPoint *treeCenter = [SPPoint pointWithX:treeRect.x+treeRect.width/2 y:treeRect.y+treeRect.height/2];
+        SPPoint *birdCenter = [SPPoint pointWithX:birdRect.x+birdRect.width/2 y:birdRect.y+birdRect.height/2];
+        if ([SPPoint distanceFromPoint:birdCenter toPoint:treeCenter] < treeRadius+30) {
+            return @"tree";
+        }
+    }
+    return nil;
+}
+
+- (void)dealloc {
+    [treeBounds release];
+    [super dealloc];
 }
 
 @end

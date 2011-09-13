@@ -8,9 +8,12 @@
 
 #import "SPCompiledSprite.h"
 
-@interface Map : SPCompiledSprite
+@interface Map : SPCompiledSprite {
+    NSMutableArray *treeBounds;
+}
 
 - (id)initWithLevel:(int)level;
 + (Map *)mapWithLevel:(int)level;
+- (NSString *)objectCollidingWithBird:(SPDisplayObject *)bird;
 
 @end

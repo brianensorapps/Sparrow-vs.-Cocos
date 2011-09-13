@@ -16,8 +16,11 @@
     SPQuad *bird;
     SPQuad *positionQuad;
     SPSprite *world;
+    BOOL invertedControls;
+    SPJuggler *gameJuggler;
 }
 
 - (id)initWithMap:(Map *)newMap;
+- (void)setInvertedControls:(BOOL)inverted;
 
 @end
