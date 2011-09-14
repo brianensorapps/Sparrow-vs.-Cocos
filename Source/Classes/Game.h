@@ -6,6 +6,7 @@
 //  Copyright 2011 Brian Ensor Apps. All rights reserved.
 //
 
+#import "SPMovieClip.h"
 #import "SPSprite.h"
 #import "Map.h"
 #import "Bird.h"
@@ -19,6 +20,7 @@
     SPSprite *world;
     BOOL invertedControls;
     SPJuggler *gameJuggler;
+    SPJuggler *movieJuggler;
 }
 
 - (id)initWithMap:(Map *)newMap;

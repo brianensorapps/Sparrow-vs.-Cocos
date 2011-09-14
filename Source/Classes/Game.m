@@ -15,7 +15,7 @@
     if ((self = [super init])) {
         gameJuggler = [[SPJuggler alloc] init];        
         bird = [[Bird alloc] init];
-        
+
         bird.x = ([Screen sharedScreen].width-bird.width)/2;
         bird.y = [Screen sharedScreen].height-bird.height-20;
         
