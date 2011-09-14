@@ -75,7 +75,6 @@
 }
 
 - (void)onEnterFrame:(SPEnterFrameEvent *)event {
-<<<<<<< HEAD
     [gameJuggler advanceTime:event.passedTime];
     world.pivotX += -sin(world.rotation)*(100*event.passedTime);
     world.pivotY += -cos(world.rotation)*(100*event.passedTime);
@@ -95,11 +94,8 @@
         [gameJuggler removeAllObjects];
         [[gameJuggler delayInvocationAtTarget:self byTime:5] setInvertedControls:NO];
     }
-=======
     map.pivotX += -sin(map.rotation)*(100*event.passedTime);
     map.pivotY += -cos(map.rotation)*(100*event.passedTime);
-    
->>>>>>> I played around with speed, no essential change
     if (turning) {
         switch (turnDirection) {
             case 0:

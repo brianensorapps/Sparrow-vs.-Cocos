@@ -40,22 +40,90 @@
                     column++;
                 }
             }
-            
-            treeBounds = [[NSMutableArray alloc] init];
-            SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
-            for (int i = 0; i<100; i++) {
-                SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
-                treeImage.x = [SPUtils randomIntBetweenMin:0 andMax:width*baseTextureSize-treeImage.width];
-                treeImage.y = [SPUtils randomIntBetweenMin:0 andMax:height*baseTextureSize-treeImage.height];
-                [self addChild:treeImage];
-                SPRectangle *bounds = treeImage.bounds;
-                bounds.width -= 10;
-                bounds.height -= 10;
-                bounds.x += 5;
-                bounds.y += 5;
-                [treeBounds addObject:bounds];
+            if([[map objectForKey:@"mapType"] isEqualToString:@"random"]){
+                treeBounds = [[NSMutableArray alloc] init];
+                SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
+                for (int i = 0; i<100; i++) {
+                    SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
+                    treeImage.x = [SPUtils randomIntBetweenMin:0 andMax:width*baseTextureSize-treeImage.width];
+                    treeImage.y = [SPUtils randomIntBetweenMin:0 andMax:height*baseTextureSize-treeImage.height];
+                    [self addChild:treeImage];
+                    SPRectangle *bounds = treeImage.bounds;
+                    bounds.width -= 10;
+                    bounds.height -= 10;
+                    bounds.x += 5;
+                    bounds.y += 5;
+                    [treeBounds addObject:bounds];
+                }
             }
-            
+            int treeMapWidth=width/4;
+            int treeMapHeight=height/4;
+            if([[map objectForKey:@"mapType"] isEqualToString:@"grown"]){
+                NSLog(@"grown layout");
+                NSMutableArray *M=[[NSMutableArray alloc] init];
+                int x,y,i,nx,ny,c;
+                //create empty map with size
+                for(x=0;x<treeMapWidth;x++){
+                    [M addObject:[[NSMutableArray alloc] init]];
+                    for(y=0;y<treeMapHeight;y++){
+                        if((x==0)||(x==treeMapWidth-1)||(y==0)||(y==treeMapHeight-1))
+                            [[M objectAtIndex:x] addObject:@"1"];
+                        else
+                            [[M objectAtIndex:x] addObject:@"0"];
+                    }
+                }
+                // add a seed
+                [[M objectAtIndex:treeMapWidth/2]  replaceObjectAtIndex:treeMapHeight/2 withObject:@"1"];
+                //now grow single trees around seed
+                i=0;
+                do{
+                    i++;
+                    x=1+(rand()%(treeMapWidth-2));
+                    y=1+(rand()%(treeMapHeight-2));
+                    if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"0"]){
+                        c=0;
+                        for(nx=x-1;nx<x+2;nx++)
+                            for(ny=y-1;ny<y+2;ny++)
+                                if((nx!=x)&&(ny!=y))
+                                    if([[[M objectAtIndex:nx] objectAtIndex:ny] isEqualToString:@"1"])
+                                        c++;
+                        if(c==1){
+                            [[M objectAtIndex:x] replaceObjectAtIndex:y withObject:@"1"];
+                            i=0;
+                        }
+                    }
+                }while(i<width*height*10);
+                //take all those threes out that connect lines
+                for(x=1;x<treeMapWidth-2;x++)
+                    for(y=1;y<treeMapHeight-2;y++)
+                        if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"1"]){
+                            c=0;
+                            for(nx=x-1;nx<x+2;nx++)
+                                for(ny=y-1;ny<y+2;ny++)
+                                    if((nx!=x)&&(ny!=y))
+                                        if([[[M objectAtIndex:nx] objectAtIndex:ny] isEqualToString:@"1"])
+                                            c++;
+                            if(c>3)
+                                [[M objectAtIndex:x] replaceObjectAtIndex:y withObject:@"0"];
+                        }
+                treeBounds = [[NSMutableArray alloc] init];
+                SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
+                for(x=0;x<treeMapHeight;x++)
+                     for(y=0;y<treeMapWidth;y++)
+                         if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"1"])
+                         {
+                             SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
+                             treeImage.x = x*baseTextureSize*4;
+                             treeImage.y = y*baseTextureSize*4;
+                             [self addChild:treeImage];
+                             SPRectangle *bounds = treeImage.bounds;
+                             bounds.width -= 10;
+                             bounds.height -= 10;
+                             bounds.x += 5;
+                             bounds.y += 5;
+                             [treeBounds addObject:bounds];
+                         }
+            }
             [self compile];
         }
         else {

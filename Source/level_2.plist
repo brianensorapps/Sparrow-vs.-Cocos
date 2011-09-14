@@ -16,6 +16,6 @@
 	<key>treeTexture</key>
 	<string>tree.png</string>
 	<key>mapType</key>
-	<string>random</string>
+	<string>grown</string>
 </dict>
 </plist>
