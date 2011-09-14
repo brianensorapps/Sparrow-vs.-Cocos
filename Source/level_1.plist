@@ -7,7 +7,7 @@
 	<key>baseTextureSize</key>
 	<integer>32</integer>
 	<key>size</key>
-	<integer>32</integer>
+	<integer>100</integer>
 	<key>treeTexture</key>
 	<string>tree.png</string>
 	<key>mapType</key>

@@ -65,8 +65,8 @@
                 i=0;
                 do{
                     i++;
-                    x=1+(rand()%(treeMapSize-2));
-                    y=1+(rand()%(treeMapSize-2));
+                    x = [SPUtils randomIntBetweenMin:1 andMax:treeMapSize-2];
+                    y = [SPUtils randomIntBetweenMin:1 andMax:treeMapSize-2];
                     if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"0"]){
                         c=0;
                         for(nx=x-1;nx<x+2;nx++)
