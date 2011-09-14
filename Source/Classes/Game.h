@@ -14,7 +14,6 @@
     BOOL turning;
     BOOL turnDirection;
     SPQuad *bird;
-    SPQuad *positionQuad;
     SPSprite *world;
     BOOL invertedControls;
     SPJuggler *gameJuggler;

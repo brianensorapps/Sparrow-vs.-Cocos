@@ -16,20 +16,17 @@
         NSString *levelPath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"level_%d", level] ofType:@"plist"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:levelPath]) {
             NSDictionary *map = [NSDictionary dictionaryWithContentsOfFile:levelPath];
-            NSDictionary *size = [map objectForKey:@"size"];
-            
+            int size = [[map objectForKey:@"size"] intValue];
             int baseTextureSize = [[map objectForKey:@"baseTextureSize"] intValue];
             int minSize = [Screen sharedScreen].width/baseTextureSize;
             int maxSize = 1024/baseTextureSize;
-            int width = [[size objectForKey:@"width"] intValue];
-            int height = [[size objectForKey:@"height"] intValue];
-            if (width < minSize || height < minSize) {
-                NSLog(@"WARNING: minimum map height and width of %d, resetting to minimum", minSize);
+            if (size < minSize) {
+                NSLog(@"WARNING: minimum map size of %d, resetting to minimum", minSize);
             }
-            if (width > maxSize || height > maxSize) {
-                NSLog(@"WARNING: maximum map height and width of %d, resetting to maximum", maxSize);
+            if (size > maxSize) {
+                NSLog(@"WARNING: maximum map size of %d, resetting to maximum", maxSize);
             }
-            int area = width*height;
+            int area = size*size;
             
             SPTexture *baseTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"baseTexture"]];
             int row = 0;
@@ -40,37 +37,36 @@
                 baseImage.y = row*baseTextureSize;
                 baseImage.color = 0xCD853F;
                 [self addChild:baseImage];
-                if (column+1 == width) {
+                if (column+1 == size) {
                     row++;
                     column = 0;
                 } else {
                     column++;
                 }
             }
-            int treeMapWidth=width/4;
-            int treeMapHeight=height/4;
+            int treeMapSize = size/4;
             if([[map objectForKey:@"mapType"] isEqualToString:@"grown"]){
                 NSLog(@"grown layout");
                 NSMutableArray *M=[[NSMutableArray alloc] init];
                 int x,y,i,nx,ny,c;
                 //create empty map with size
-                for(x=0;x<treeMapWidth;x++){
+                for(x=0;x<treeMapSize;x++){
                     [M addObject:[[NSMutableArray alloc] init]];
-                    for(y=0;y<treeMapHeight;y++){
-                        if((x==0)||(x==treeMapWidth-1)||(y==0)||(y==treeMapHeight-1))
+                    for(y=0;y<treeMapSize;y++){
+                        if((x==0)||(x==treeMapSize-1)||(y==0)||(y==treeMapSize-1))
                             [[M objectAtIndex:x] addObject:@"1"];
                         else
                             [[M objectAtIndex:x] addObject:@"0"];
                     }
                 }
                 // add a seed
-                [[M objectAtIndex:treeMapWidth/2]  replaceObjectAtIndex:treeMapHeight/2 withObject:@"1"];
+                [[M objectAtIndex:treeMapSize/2]  replaceObjectAtIndex:treeMapSize/2 withObject:@"1"];
                 //now grow single trees around seed
                 i=0;
                 do{
                     i++;
-                    x=1+(rand()%(treeMapWidth-2));
-                    y=1+(rand()%(treeMapHeight-2));
+                    x=1+(rand()%(treeMapSize-2));
+                    y=1+(rand()%(treeMapSize-2));
                     if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"0"]){
                         c=0;
                         for(nx=x-1;nx<x+2;nx++)
@@ -83,10 +79,10 @@
                             i=0;
                         }
                     }
-                }while(i<width*height*10);
+                }while(i<area*10);
                 //take all those threes out that connect lines
-                for(x=1;x<treeMapWidth-2;x++)
-                    for(y=1;y<treeMapHeight-2;y++)
+                for(x=1;x<treeMapSize-2;x++)
+                    for(y=1;y<treeMapSize-2;y++)
                         if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"1"]){
                             c=0;
                             for(nx=x-1;nx<x+2;nx++)
@@ -99,8 +95,8 @@
                         }
                 treeBounds = [[NSMutableArray alloc] init];
                 SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
-                for(x=0;x<treeMapHeight;x++)
-                     for(y=0;y<treeMapWidth;y++)
+                for(x=0;x<treeMapSize;x++)
+                     for(y=0;y<treeMapSize;y++)
                          if([[[M objectAtIndex:x] objectAtIndex:y] isEqualToString:@"1"])
                          {
                              SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
