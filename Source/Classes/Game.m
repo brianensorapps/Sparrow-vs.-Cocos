@@ -94,8 +94,6 @@
         [gameJuggler removeAllObjects];
         [[gameJuggler delayInvocationAtTarget:self byTime:5] setInvertedControls:NO];
     }
-    map.pivotX += -sin(map.rotation)*(100*event.passedTime);
-    map.pivotY += -cos(map.rotation)*(100*event.passedTime);
     if (turning) {
         switch (turnDirection) {
             case 0:

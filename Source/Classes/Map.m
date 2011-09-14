@@ -20,8 +20,15 @@
             
             int baseTextureSize = [[map objectForKey:@"baseTextureSize"] intValue];
             int minSize = [Screen sharedScreen].width/baseTextureSize;
-            int width = MAX([[size objectForKey:@"width"] intValue], minSize);
-            int height = MAX([[size objectForKey:@"height"] intValue], minSize);
+            int maxSize = 1024/baseTextureSize;
+            int width = [[size objectForKey:@"width"] intValue];
+            int height = [[size objectForKey:@"height"] intValue];
+            if (width < minSize || height < minSize) {
+                NSLog(@"WARNING: minimum map height and width of %d, resetting to minimum", minSize);
+            }
+            if (width > maxSize || height > maxSize) {
+                NSLog(@"WARNING: maximum map height and width of %d, resetting to maximum", maxSize);
+            }
             int area = width*height;
             
             SPTexture *baseTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"baseTexture"]];
@@ -38,22 +45,6 @@
                     column = 0;
                 } else {
                     column++;
-                }
-            }
-            if([[map objectForKey:@"mapType"] isEqualToString:@"random"]){
-                treeBounds = [[NSMutableArray alloc] init];
-                SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
-                for (int i = 0; i<100; i++) {
-                    SPImage *treeImage = [SPImage imageWithTexture:treeTexture];
-                    treeImage.x = [SPUtils randomIntBetweenMin:0 andMax:width*baseTextureSize-treeImage.width];
-                    treeImage.y = [SPUtils randomIntBetweenMin:0 andMax:height*baseTextureSize-treeImage.height];
-                    [self addChild:treeImage];
-                    SPRectangle *bounds = treeImage.bounds;
-                    bounds.width -= 10;
-                    bounds.height -= 10;
-                    bounds.x += 5;
-                    bounds.y += 5;
-                    [treeBounds addObject:bounds];
                 }
             }
             int treeMapWidth=width/4;
@@ -144,7 +135,7 @@
         float treeRadius = treeRect.width/2;
         SPPoint *treeCenter = [SPPoint pointWithX:treeRect.x+treeRect.width/2 y:treeRect.y+treeRect.height/2];
         SPPoint *birdCenter = [SPPoint pointWithX:birdRect.x+birdRect.width/2 y:birdRect.y+birdRect.height/2];
-        if ([SPPoint distanceFromPoint:birdCenter toPoint:treeCenter] < treeRadius+30) {
+        if ([SPPoint distanceFromPoint:birdCenter toPoint:treeCenter] < treeRadius+25) {
             return @"tree";
         }
     }

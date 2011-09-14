@@ -18,7 +18,7 @@
         [self addChild:screen];
         screen.showsFPS = YES;
         
-        Game *game = [[Game alloc] initWithMap:[Map mapWithLevel:2]];
+        Game *game = [[Game alloc] initWithMap:[Map mapWithLevel:1]];
         [screen addChild:game];
         [game release];
     }
