@@ -13,6 +13,7 @@
 		067F1C7514217A2D006E3743 /* Sparrow003.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C6F14217A2D006E3743 /* Sparrow003.png */; };
 		067F1C7614217A2D006E3743 /* Sparrow004.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C7014217A2D006E3743 /* Sparrow004.png */; };
 		067F1C7714217A2D006E3743 /* Sparrow005.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C7114217A2D006E3743 /* Sparrow005.png */; };
+		06B518E11422026C0010C80B /* Bird.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B518E01422026C0010C80B /* Bird.m */; };
 		1D3623260D0F684500981E51 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* ApplicationDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -67,6 +68,8 @@
 		067F1C6F14217A2D006E3743 /* Sparrow003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow003.png; sourceTree = "<group>"; };
 		067F1C7014217A2D006E3743 /* Sparrow004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow004.png; sourceTree = "<group>"; };
 		067F1C7114217A2D006E3743 /* Sparrow005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow005.png; sourceTree = "<group>"; };
+		06B518DF1422026C0010C80B /* Bird.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bird.h; sourceTree = "<group>"; };
+		06B518E01422026C0010C80B /* Bird.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bird.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				D3D16BC5141D5D1600298E6E /* Game.m */,
 				D3D16BC1141D5AFF00298E6E /* Map.h */,
 				D3D16BC2141D5AFF00298E6E /* Map.m */,
+				06B518DF1422026C0010C80B /* Bird.h */,
+				06B518E01422026C0010C80B /* Bird.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				D3D5760E141D522A0016D9B7 /* Screen.m in Sources */,
 				D3D16BC3141D5AFF00298E6E /* Map.m in Sources */,
 				D3D16BC6141D5D1600298E6E /* Game.m in Sources */,
+				06B518E11422026C0010C80B /* Bird.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

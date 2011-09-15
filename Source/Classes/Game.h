@@ -8,17 +8,16 @@
 
 #import "SPSprite.h"
 #import "Map.h"
+#import "Bird.h"
 
 @interface Game : SPSprite {
     Map *map;
+    Bird *bird;
     BOOL turning;
     BOOL turnDirection;
-    SPMovieClip *bird;
-    SPMovieClip *birdShadow;
     SPSprite *world;
     BOOL invertedControls;
     SPJuggler *gameJuggler;
-    SPJuggler *birdJuggler;
 }
 
 - (id)initWithMap:(Map *)newMap;
