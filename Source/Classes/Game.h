@@ -13,10 +13,12 @@
     Map *map;
     BOOL turning;
     BOOL turnDirection;
-    SPQuad *bird;
+    SPMovieClip *bird;
+    SPMovieClip *birdShadow;
     SPSprite *world;
     BOOL invertedControls;
     SPJuggler *gameJuggler;
+    SPJuggler *birdJuggler;
 }
 
 - (id)initWithMap:(Map *)newMap;

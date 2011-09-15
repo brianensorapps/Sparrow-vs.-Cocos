@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		067F1C7214217A2D006E3743 /* Sparrow000.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C6C14217A2D006E3743 /* Sparrow000.png */; };
+		067F1C7314217A2D006E3743 /* Sparrow001.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C6D14217A2D006E3743 /* Sparrow001.png */; };
+		067F1C7414217A2D006E3743 /* Sparrow002.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C6E14217A2D006E3743 /* Sparrow002.png */; };
+		067F1C7514217A2D006E3743 /* Sparrow003.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C6F14217A2D006E3743 /* Sparrow003.png */; };
+		067F1C7614217A2D006E3743 /* Sparrow004.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C7014217A2D006E3743 /* Sparrow004.png */; };
+		067F1C7714217A2D006E3743 /* Sparrow005.png in Resources */ = {isa = PBXBuildFile; fileRef = 067F1C7114217A2D006E3743 /* Sparrow005.png */; };
 		1D3623260D0F684500981E51 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* ApplicationDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -55,6 +61,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		067F1C6C14217A2D006E3743 /* Sparrow000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow000.png; sourceTree = "<group>"; };
+		067F1C6D14217A2D006E3743 /* Sparrow001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow001.png; sourceTree = "<group>"; };
+		067F1C6E14217A2D006E3743 /* Sparrow002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow002.png; sourceTree = "<group>"; };
+		067F1C6F14217A2D006E3743 /* Sparrow003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow003.png; sourceTree = "<group>"; };
+		067F1C7014217A2D006E3743 /* Sparrow004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow004.png; sourceTree = "<group>"; };
+		067F1C7114217A2D006E3743 /* Sparrow005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sparrow005.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
@@ -107,6 +119,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		067F1C6B14217A1F006E3743 /* Sparrow */ = {
+			isa = PBXGroup;
+			children = (
+				067F1C6C14217A2D006E3743 /* Sparrow000.png */,
+				067F1C6D14217A2D006E3743 /* Sparrow001.png */,
+				067F1C6E14217A2D006E3743 /* Sparrow002.png */,
+				067F1C6F14217A2D006E3743 /* Sparrow003.png */,
+				067F1C7014217A2D006E3743 /* Sparrow004.png */,
+				067F1C7114217A2D006E3743 /* Sparrow005.png */,
+			);
+			name = Sparrow;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +183,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				067F1C6B14217A1F006E3743 /* Sparrow */,
 				D35305FA141EBFDB006B2B50 /* tree.png */,
 				D35305FB141EBFDB006B2B50 /* tree@2x.png */,
 				D3D16BC7141D602A00298E6E /* dirt.png */,
@@ -281,6 +307,12 @@
 				D3D16BCA141D602A00298E6E /* dirt@2x.png in Resources */,
 				D35305FC141EBFDB006B2B50 /* tree.png in Resources */,
 				D35305FD141EBFDB006B2B50 /* tree@2x.png in Resources */,
+				067F1C7214217A2D006E3743 /* Sparrow000.png in Resources */,
+				067F1C7314217A2D006E3743 /* Sparrow001.png in Resources */,
+				067F1C7414217A2D006E3743 /* Sparrow002.png in Resources */,
+				067F1C7514217A2D006E3743 /* Sparrow003.png in Resources */,
+				067F1C7614217A2D006E3743 /* Sparrow004.png in Resources */,
+				067F1C7714217A2D006E3743 /* Sparrow005.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
