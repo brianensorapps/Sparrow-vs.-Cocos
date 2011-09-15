@@ -63,6 +63,11 @@
     [bird advanceTime:event.passedTime];
     world.pivotX += -sin(world.rotation)*(100*event.passedTime);
     world.pivotY += -cos(world.rotation)*(100*event.passedTime);
+    SPRectangle *birdBounds = [bird boundsInSpace:map];
+    SPPoint *birdPosition = [SPPoint pointWithX:birdBounds.x+birdBounds.width/2 y:birdBounds.y+birdBounds.height/2];
+    [bird moveBirdShadowX:birdPosition.x/30];
+    [bird moveBirdShadowY:birdPosition.y/30];
+
     NSString *collisionName = [map objectCollidingWithBird:bird];
     if ([collisionName isEqualToString:@"tree"]) {
         [self setInvertedControls:YES];
@@ -73,21 +78,17 @@
         switch (turnDirection) {
             case 0:
                 if (!invertedControls) {
-                    [bird moveBirdShadow:sin(world.rotation)*3];
                     world.rotation += SP_D2R(50)*event.passedTime;
                 }
                 else {
-                    [bird moveBirdShadow:sin(world.rotation)*3];
                     world.rotation -= SP_D2R(50)*event.passedTime;
                 }
                 break;
             case 1:
                 if (!invertedControls) {
-                    [bird moveBirdShadow:sin(world.rotation)*3];
                     world.rotation -= SP_D2R(50)*event.passedTime;
                 }
                 else {
-                    [bird moveBirdShadow:sin(world.rotation)*3];
                     world.rotation += SP_D2R(50)*event.passedTime;
                 }
                 break;
@@ -99,9 +100,11 @@
 
 - (void)setInvertedControls:(BOOL)inverted {
     if (inverted) {
+        [bird dizzyBird];
         //bird.color = 0xFF0000;
     }
     else {
+        [bird undizzyBird];
         //bird.color = 0x0000FF;
     }
     invertedControls = inverted;

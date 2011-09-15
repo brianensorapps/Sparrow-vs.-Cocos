@@ -15,6 +15,8 @@
     SPJuggler *birdJuggler;
 }
 -(void)advanceTime:(double)seconds;
--(void)moveBirdShadow:(int)shadowX;
-
+-(void)moveBirdShadowX:(float)shadowX;
+-(void)moveBirdShadowY:(float)shadowY;
+-(void)dizzyBird;
+-(void)undizzyBird;
 @end

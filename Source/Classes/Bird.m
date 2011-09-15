@@ -63,8 +63,24 @@
     [birdJuggler advanceTime:seconds];
     
 }
--(void)moveBirdShadow:(int)shadowX;
+-(void)moveBirdShadowX:(float)shadowX
 {
-    birdShadow.x += shadowX;
+    birdShadow.x = shadowX;
+}
+-(void)moveBirdShadowY:(float)shadowY
+{
+    birdShadow.y = shadowY;
+}
+-(void)dizzyBird
+{
+    SPTween *dizzy = [SPTween tweenWithTarget:bird time:0.3];
+    [dizzy animateProperty:@"alpha" targetValue:0.3];
+    dizzy.loop = SPLoopTypeReverse;
+    [birdJuggler addObject:dizzy];
+}
+-(void)undizzyBird
+{
+    [birdJuggler removeTweensWithTarget:bird];
+    bird.alpha = 1;
 }
 @end
