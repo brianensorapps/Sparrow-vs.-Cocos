@@ -15,8 +15,18 @@
     if ((self = [super init])) {
         gameJuggler = [[SPJuggler alloc] init];        
         bird = [[Bird alloc] init];
+        
         bird.x = ([Screen sharedScreen].width-bird.width)/2;
         bird.y = [Screen sharedScreen].height-bird.height-20;
+        
+        birdShadow = [[Bird alloc] init];
+        birdShadow.pivotX = birdShadow.width;
+        birdShadow.pivotY = birdShadow.height;
+        birdShadow.x = bird.x;
+        birdShadow.y = bird.y;
+        birdShadow.scaleX = 0.5;
+        birdShadow.scaleY = 0.5;
+        [birdShadow makeShadow];
         
         SPQuad *background = [SPQuad quadWithWidth:480 height:320];
         background.color = 0x000000;
@@ -33,6 +43,7 @@
         
         [world addChild:map];
         
+        [self addChild:birdShadow];
         [self addChild:bird];
         
         [self addEventListener:@selector(onEnterFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
@@ -47,26 +58,43 @@
     if (touch.phase == SPTouchPhaseBegan) {
         if (touchLocation.x < 240) {
             turnDirection = 0;
+            if (invertedControls) {
+                [bird turnRight];
+                [birdShadow turnRight];
+            } else {
+            [bird turnLeft];
+            [birdShadow turnLeft];
+            }
         }
         else if (touchLocation.x > 240) {
             turnDirection = 1;
+            if (invertedControls) {
+                [bird turnLeft];
+                [birdShadow turnLeft];
+            } else {
+                [bird turnRight];
+                [birdShadow turnRight];
+            }
         }
         turning = YES;
     }
     else if (touch.phase == SPTouchPhaseEnded) {
         turning = NO;
+        [bird goStraight];
+        [birdShadow goStraight];
     }
 }
 
 - (void)onEnterFrame:(SPEnterFrameEvent *)event {
     [gameJuggler advanceTime:event.passedTime];
     [bird advanceTime:event.passedTime];
+    [birdShadow advanceTime:event.passedTime];
     world.pivotX += -sin(world.rotation)*(100*event.passedTime);
     world.pivotY += -cos(world.rotation)*(100*event.passedTime);
     SPRectangle *birdBounds = [bird boundsInSpace:map];
     SPPoint *birdPosition = [SPPoint pointWithX:birdBounds.x+birdBounds.width/2 y:birdBounds.y+birdBounds.height/2];
-    [bird moveBirdShadowX:birdPosition.x/30];
-    [bird moveBirdShadowY:birdPosition.y/30];
+    [birdShadow moveShadowX:birdPosition.x/8];
+    [birdShadow moveShadowY:birdPosition.y/8];
 
     NSString *collisionName = [map objectCollidingWithBird:bird];
     if ([collisionName isEqualToString:@"tree"]) {

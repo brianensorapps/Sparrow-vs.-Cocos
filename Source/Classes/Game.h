@@ -13,6 +13,7 @@
 @interface Game : SPSprite {
     Map *map;
     Bird *bird;
+    Bird *birdShadow;
     BOOL turning;
     BOOL turnDirection;
     SPSprite *world;

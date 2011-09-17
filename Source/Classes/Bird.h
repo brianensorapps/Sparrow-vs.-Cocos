@@ -10,13 +10,21 @@
 
 
 @interface Bird : SPSprite {
-    SPMovieClip *bird;
-    SPMovieClip *birdShadow;
+    SPSprite *bird;
+    SPMovieClip *LeftWing;
+    SPMovieClip *RightWing;
+    SPMovieClip *Body;
+    SPImage *Tail;
     SPJuggler *birdJuggler;
+    BOOL isDizzy;
 }
 -(void)advanceTime:(double)seconds;
--(void)moveBirdShadowX:(float)shadowX;
--(void)moveBirdShadowY:(float)shadowY;
 -(void)dizzyBird;
 -(void)undizzyBird;
+-(void)turnLeft;
+-(void)turnRight;
+-(void)goStraight;
+-(void)makeShadow;
+-(void)moveShadowX:(float)birdX;
+-(void)moveShadowY:(float)birdY;
 @end
