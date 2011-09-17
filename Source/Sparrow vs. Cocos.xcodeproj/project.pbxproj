@@ -105,14 +105,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Application_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Application-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		C0754A5D1421501F00582272 /* Sparrow001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow001.png; path = Images/Sparrow001.png; sourceTree = "<group>"; };
-		C0754A5E1421501F00582272 /* Sparrow000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow000.png; path = Images/Sparrow000.png; sourceTree = "<group>"; };
-		C0754A5F1421501F00582272 /* Sparrow002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow002.png; path = Images/Sparrow002.png; sourceTree = "<group>"; };
-		C0754A601421501F00582272 /* Sparrow003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow003.png; path = Images/Sparrow003.png; sourceTree = "<group>"; };
-		C0754A611421501F00582272 /* Sparrow004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow004.png; path = Images/Sparrow004.png; sourceTree = "<group>"; };
-		C0754A621421501F00582272 /* Sparrow005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sparrow005.png; path = Images/Sparrow005.png; sourceTree = "<group>"; };
-		C0754A9C1424CDC500582272 /* Coco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coco.h; sourceTree = "<group>"; };
-		C0754A9D1424CDC500582272 /* Coco.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coco.m; sourceTree = "<group>"; };
 		D35305FA141EBFDB006B2B50 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		D35305FB141EBFDB006B2B50 /* tree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tree@2x.png"; sourceTree = "<group>"; };
 		D3D16BBF141D59FC00298E6E /* level_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_1.plist; sourceTree = "<group>"; };
@@ -211,13 +203,8 @@
 				D3D16BC5141D5D1600298E6E /* Game.m */,
 				D3D16BC1141D5AFF00298E6E /* Map.h */,
 				D3D16BC2141D5AFF00298E6E /* Map.m */,
-<<<<<<< HEAD
 				06B518DF1422026C0010C80B /* Bird.h */,
 				06B518E01422026C0010C80B /* Bird.m */,
-=======
-				C0754A9C1424CDC500582272 /* Coco.h */,
-				C0754A9D1424CDC500582272 /* Coco.m */,
->>>>>>> miniMap and Coco
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -235,7 +222,6 @@
 			children = (
 				DE4A3DA210FFB0D400FDA492 /* Sparrow.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				C0754A5C1421500C00582272 /* Images */,
 				D3D16BBE141D59B500298E6E /* Levels */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -281,19 +267,6 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C0754A5C1421500C00582272 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				C0754A5E1421501F00582272 /* Sparrow000.png */,
-				C0754A5D1421501F00582272 /* Sparrow001.png */,
-				C0754A5F1421501F00582272 /* Sparrow002.png */,
-				C0754A601421501F00582272 /* Sparrow003.png */,
-				C0754A611421501F00582272 /* Sparrow004.png */,
-				C0754A621421501F00582272 /* Sparrow005.png */,
-			);
-			name = Images;
 			sourceTree = "<group>";
 		};
 		D3D16BBE141D59B500298E6E /* Levels */ = {
@@ -429,11 +402,7 @@
 				D3D5760E141D522A0016D9B7 /* Screen.m in Sources */,
 				D3D16BC3141D5AFF00298E6E /* Map.m in Sources */,
 				D3D16BC6141D5D1600298E6E /* Game.m in Sources */,
-<<<<<<< HEAD
 				06B518E11422026C0010C80B /* Bird.m in Sources */,
-=======
-				C0754A9E1424CDC500582272 /* Coco.m in Sources */,
->>>>>>> miniMap and Coco
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,4 +16,5 @@
 + (Map *)mapWithLevel:(int)level;
 - (NSString *)objectCollidingWithBird:(SPDisplayObject *)bird;
 -(SPCompiledSprite*) miniMap;
+
 @end

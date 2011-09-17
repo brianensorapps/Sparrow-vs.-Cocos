@@ -15,7 +15,7 @@
     if ((self = [super init])) {
         gameJuggler = [[SPJuggler alloc] init];        
         bird = [[Bird alloc] init];
-
+        
         bird.x = ([Screen sharedScreen].width-bird.width)/2;
         bird.y = [Screen sharedScreen].height-bird.height-20;
         
@@ -43,11 +43,10 @@
         
         [world addChild:map];
         
+        [self addChild:[map miniMap]];
+        
         [self addChild:birdShadow];
         [self addChild:bird];
-        
-        //add the map containing all the trees:
-        [self addChild:[map miniMap]];
         
         [self addEventListener:@selector(onEnterFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
         [self addEventListener:@selector(onTouch:) atObject:self forType:SP_EVENT_TYPE_TOUCH];
