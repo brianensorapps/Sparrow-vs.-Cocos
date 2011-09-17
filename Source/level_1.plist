@@ -6,11 +6,11 @@
 	<string>dirt.png</string>
 	<key>baseTextureSize</key>
 	<integer>32</integer>
+	<key>mapType</key>
+	<string>grown</string>
 	<key>size</key>
 	<integer>100</integer>
 	<key>treeTexture</key>
 	<string>tree.png</string>
-	<key>mapType</key>
-	<string>grown</string>
 </dict>
 </plist>

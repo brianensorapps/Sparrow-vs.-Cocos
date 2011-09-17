@@ -90,7 +90,7 @@
                                     if((nx!=x)&&(ny!=y))
                                         if([[[M objectAtIndex:nx] objectAtIndex:ny] isEqualToString:@"1"])
                                             c++;
-                            if(c>3)
+                            if(c>2)
                                 [[M objectAtIndex:x] replaceObjectAtIndex:y withObject:@"0"];
                         }
                 treeBounds = [[NSMutableArray alloc] init];
@@ -137,6 +137,23 @@
     }
     return nil;
 }
+
+-(SPCompiledSprite*) miniMap{
+    //loops over treeBounds and creates a miniMap/compiled sprite so that 
+    //one can see where the trees are
+    SPCompiledSprite *S=[[SPCompiledSprite alloc] init];
+    for(SPRectangle *R in treeBounds){
+        SPQuad *Q=[SPQuad quadWithWidth:2 height:2];
+        Q.color=0x00FF00;
+        Q.alpha=0.5;
+        Q.x=R.x/(64);
+        Q.y=R.y/(64);
+        [S addChild:Q];
+    }
+    [S compile];
+    return S;
+}
+
 
 - (void)dealloc {
     [treeBounds release];

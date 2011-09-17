@@ -46,6 +46,9 @@
         [self addChild:birdShadow];
         [self addChild:bird];
         
+        //add the map containing all the trees:
+        [self addChild:[map miniMap]];
+        
         [self addEventListener:@selector(onEnterFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
         [self addEventListener:@selector(onTouch:) atObject:self forType:SP_EVENT_TYPE_TOUCH];
     }
