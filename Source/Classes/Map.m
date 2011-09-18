@@ -10,6 +10,7 @@
 #import "Screen.h"
 
 @implementation Map
+@synthesize collisionMap;
 
 - (id)initWithLevel:(int)level {
     if ((self = [super init])) {
@@ -20,6 +21,13 @@
             int baseTextureSize = [[map objectForKey:@"baseTextureSize"] intValue];
             int minSize = [Screen sharedScreen].width/baseTextureSize;
             int maxSize = 1024/baseTextureSize;
+            collisionMap=[[NSMutableArray alloc] init];
+            //initialize the collision map, contains 0 for empty tiles, and 1 for full
+            for(int x=0;x<size;x++){
+                [collisionMap addObject:[[NSMutableArray alloc] init]];
+                for(int y=0;y<size;y++)
+                    [[collisionMap objectAtIndex:x] addObject:[[[NSNumber alloc] initWithInt:0] autorelease]];
+            }
             if (size < minSize) {
                 NSLog(@"WARNING: minimum map size of %d, resetting to minimum", minSize);
             }
@@ -53,8 +61,12 @@
                 for(x=0;x<treeMapSize;x++){
                     [M addObject:[[NSMutableArray alloc] init]];
                     for(y=0;y<treeMapSize;y++){
-                        if((x==0)||(x==treeMapSize-1)||(y==0)||(y==treeMapSize-1))
+                        if((x==0)||(x==treeMapSize-1)||(y==0)||(y==treeMapSize-1)){
                             [[M objectAtIndex:x] addObject:@"1"];
+                            for(int dx=0;dx<4;dx++)
+                                for(int dy=0;dy<4;dy++)
+                                    [[collisionMap objectAtIndex:x*4+dx] replaceObjectAtIndex:y*4+dy withObject:[[NSNumber alloc] initWithInt:1]];
+                        }
                         else
                             [[M objectAtIndex:x] addObject:@"0"];
                     }
@@ -77,6 +89,10 @@
                         if(c==1){
                             [[M objectAtIndex:x] replaceObjectAtIndex:y withObject:@"1"];
                             i=0;
+                            //add a 4x4 patch of 1 to the collision map, a tree a four times bigger then our base tile
+                            for(int dx=0;dx<4;dx++)
+                                for(int dy=0;dy<4;dy++)
+                                    [[collisionMap objectAtIndex:x*4+dx] replaceObjectAtIndex:y*4+dy withObject:[[NSNumber alloc] initWithInt:1]];
                         }
                     }
                 }while(i<area*10);
@@ -90,8 +106,13 @@
                                     if((nx!=x)&&(ny!=y))
                                         if([[[M objectAtIndex:nx] objectAtIndex:ny] isEqualToString:@"1"])
                                             c++;
-                            if(c>2)
+                            if(c>2){
                                 [[M objectAtIndex:x] replaceObjectAtIndex:y withObject:@"0"];
+                                //take out a 4x4 patch of 1 (turn into 0) for each tree I remove
+                                for(int dx=0;dx<4;dx++)
+                                    for(int dy=0;dy<4;dy++)
+                                        [[collisionMap objectAtIndex:x*4+dx] replaceObjectAtIndex:y*4+dy withObject:[[NSNumber alloc] initWithInt:0]];
+                            }
                         }
                 treeBounds = [[NSMutableArray alloc] init];
                 SPTexture *treeTexture = [SPTexture textureWithContentsOfFile:[map objectForKey:@"treeTexture"]];
@@ -111,6 +132,7 @@
                              [treeBounds addObject:bounds];
                          }
             }
+            NSLog(@"%@",treeBounds);
             [self compile];
         }
         else {
@@ -143,11 +165,11 @@
     //one can see where the trees are
     SPCompiledSprite *S=[[SPCompiledSprite alloc] init];
     for(SPRectangle *R in treeBounds){
-        SPQuad *Q=[SPQuad quadWithWidth:2 height:2];
+        SPQuad *Q=[SPQuad quadWithWidth:4 height:4];
         Q.color=0x00FF00;
         Q.alpha=0.5;
-        Q.x=R.x/(64);
-        Q.y=R.y/(64);
+        Q.x=R.x/(32);
+        Q.y=R.y/(32);
         [S addChild:Q];
     }
     [S compile];

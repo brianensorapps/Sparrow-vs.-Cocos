@@ -10,11 +10,13 @@
 
 @interface Map : SPCompiledSprite {
     NSMutableArray *treeBounds;
+    NSMutableArray *collisionMap;
 }
 
 - (id)initWithLevel:(int)level;
 + (Map *)mapWithLevel:(int)level;
 - (NSString *)objectCollidingWithBird:(SPDisplayObject *)bird;
 -(SPCompiledSprite*) miniMap;
+@property (retain) NSMutableArray* collisionMap;
 
 @end

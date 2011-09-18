@@ -44,9 +44,13 @@
         [world addChild:map];
         
         [self addChild:[map miniMap]];
-        
+        Frog *F=[[Frog alloc] initWithPosition:[[SPPoint alloc] initWithX:50 y:40] inMap:map];
+        [world addChild:F];
+        Coco *C=[[Coco alloc] initWithPosition:[[SPPoint alloc] initWithX:5 y:5] targetPosition:[[SPPoint alloc] initWithX:94 y:94] inMap:map];
+        [world addChild:C];
         [self addChild:birdShadow];
         [self addChild:bird];
+        
         
         [self addEventListener:@selector(onEnterFrame:) atObject:self forType:SP_EVENT_TYPE_ENTER_FRAME];
         [self addEventListener:@selector(onTouch:) atObject:self forType:SP_EVENT_TYPE_TOUCH];

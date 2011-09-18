@@ -9,6 +9,8 @@
 #import "SPSprite.h"
 #import "Map.h"
 #import "Bird.h"
+#import "Coco.h"
+#import "Frog.h"
 
 @interface Game : SPSprite {
     Map *map;
